@@ -1,0 +1,23 @@
+{
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.renderWhitespace": "all",
+        "editor.acceptSuggestionOnEnter": "off"
+    },
+    "editor.tabSize": 4,
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    //
+    "js/ts.preferences.quoteStyle": "single",
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+      },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "html.format.enable": true,
+    "html.format.wrapAttributes": "force-aligned",
+    "workbench.editor.enablePreview": false
+}
