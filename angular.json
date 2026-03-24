@@ -29,7 +29,17 @@
                         "assets": [
                             {
                                 "glob": "**/*",
-                                "input": "public"
+                                "input": "src/assets/",
+                                "ignore": [
+                                    "**/icons/svg-icons/*",
+                                    "**/icons/*"
+                                ],
+                                "output": "/assets/"
+                            },
+                            {
+                                "glob": "favicon.ico",
+                                "input": "src/",
+                                "output": "/"
                             }
                         ],
                         "styles": [
@@ -94,7 +104,12 @@
                         "assets": [
                             {
                                 "glob": "**/*",
-                                "input": "public"
+                                "input": "src/assets/",
+                                "ignore": [
+                                    "**/icons/svg-icons/*",
+                                    "**/icons/*"
+                                ],
+                                "output": "/assets/"
                             }
                         ],
                         "styles": [
