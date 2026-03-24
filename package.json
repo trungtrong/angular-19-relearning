@@ -3,10 +3,15 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
-        "build": "ng build",
+        "serve": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve --liveReload=false --open=false",
+        "// To run verbose": "DEBUG=* npm run start-verbose &>test.log",
+        "start-verbose": "node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng serve --verbose",
+        "// BUILD": "Build based on Environments",
+        "build-prod": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --configuration=production",
+        "// TEST": "Build based on Environments",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
+        "// Code Formatter": "Point out and Format Code",
         "lint": "ng lint",
         "lint:fix": "ng lint --fix"
     },
