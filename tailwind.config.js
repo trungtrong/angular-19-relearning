@@ -6,7 +6,7 @@ const TailwindPreFunction = require("./tailwind.pre-function");
 module.exports = {
     prefix: "",
     content: ["./src/**/*.html", "./src/**/*.ts"],
-    darkMode: "class", // or 'media' or 'class'
+    // darkMode: "selector", // Manually switch Theme Mode
     /**
      * Src: https://tailwindcss.com/docs/upgrade-guide#disabling-core-plugins
      * In v4, corePlugins doesn't support
@@ -16,7 +16,11 @@ module.exports = {
     },
     theme: {
         // Overwrite the default tailwindCSS
-        colors: {},
+        colors: {
+            inherit: "inherit",
+            transparent: "transparent",
+            current: "currentColor",
+        },
         spacing: {},
         //
         fontFamily: {},
@@ -94,6 +98,10 @@ module.exports = {
                 toNumber: 100,
                 hasDefaultDecimalPart: true,
             }),
+            //
+            colors: {
+                'app': 'var(--bg-color-app)'
+            },
         },
     },
     plugins: [
