@@ -1,11 +1,15 @@
 import { Routes } from '@angular/router';
 import { PageNotFoundComponent } from './core/pages';
-import { HomeComponent } from './modules/home';
 
 export const routes: Routes = [
     {
         path: "",
-        component: HomeComponent,
+        loadChildren: () => import('./modules/home/routes').then((c => c.HOME_ROUTES)),
+        title: 'App'
+    },
+    {
+        path: "",
+        loadChildren: () => import('./modules/auth/routes').then((c => c.AUTH_ROUTES)),
         title: 'App'
     },
     {

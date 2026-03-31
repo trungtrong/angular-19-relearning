@@ -3,13 +3,13 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
     standalone: true,
-    selector: 'app-home',
-    templateUrl: 'home.component.html',
-    styleUrl: 'home.component.scss',
+    selector: 'app-auth',
+    templateUrl: 'auth.component.html',
+    styleUrl: 'auth.component.scss',
     imports: [RouterOutlet]
 })
-export class HomeComponent implements OnInit {
+export class AuthComponent implements OnInit {
     ngOnInit(): void {
-        console.log('This is Home Page');
+        console.log('This is Authentication');
     }
 }
