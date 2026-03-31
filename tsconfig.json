@@ -3,6 +3,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
+        "baseUrl": "src",
         "outDir": "./dist/out-tsc",
         "strict": true,
         "noImplicitOverride": true,
@@ -16,7 +17,32 @@
         "moduleResolution": "bundler",
         "importHelpers": true,
         "target": "ES2022",
-        "module": "ES2022"
+        "module": "ES2022",
+        "paths": {
+            "@environment": ["environments/environment.ts"],
+            "@environments/*": ["environments/*"],
+            "@app/utilities": ["app/utilities"],
+            "@app/common/*": ["app/common/*"],
+            "@app/core/*": ["app/core/*"],
+            "@app/core/guards/*": ["app/core/guards/*"],
+            "@app/core/interceptors/*": ["app/core/interceptors/*"],
+            "@app/core/layouts/*": ["app/core/layouts/*"],
+            "@app/core/pages/*": ["app/core/pages/*"],
+            "@app/core/resolvers/*": ["app/core/resolvers/*"],
+            "@app/core/services/*": ["app/core/services/*"],
+            "@app/core/states/*": ["app/core/states/*"],
+            "@app/modules/*": ["app/modules/*"],
+            "@app/theme": ["app/theme"],
+            "@app/shared/*": ["app/shared/*.ts"],
+            "@app/shared/components": ["app/shared/components/index.ts"],
+            "@app/shared/components/*": ["app/shared/components/*"],
+            "@app/shared/models": ["app/shared/models/index.ts"],
+            "@app/services/*": ["app/services/*"],
+            "@app/services/endpoints": ["app/services/endpoints.ts"],
+            "@app/models": ["app/models"],
+            "@app/models/*": ["app/models/*"],
+            "@svg-icons": ["assets/icons/svg-icons.constants.ts"]
+        }
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
