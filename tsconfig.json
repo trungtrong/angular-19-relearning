@@ -19,6 +19,7 @@
         "target": "ES2022",
         "module": "ES2022",
         "paths": {
+            "jszip": ["node_modules/jszip/dist/jszip.min.js"],
             "@environment": ["environments/environment.ts"],
             "@environments/*": ["environments/*"],
             "@app/utilities": ["app/utilities"],
