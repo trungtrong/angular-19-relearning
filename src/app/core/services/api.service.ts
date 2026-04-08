@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { from, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 //
-import { AppStorage, API_URL, AppUrls, AppNotify } from '@app/utilities';
-import { ACCESS_TOKEN_KEY, AUTH_SCHEME } from '@app/shared/constants';
+import { AppStorage, AppNotify } from '@app/utilities';
+import { ACCESS_TOKEN_KEY, APP_URLS, AUTH_SCHEME } from '@app/shared/constants';
 import { environment } from '@environment';
 import { AttachmentModel, ListItemModel } from '@app/shared/models';
 import { ApiErrorCode } from '@app/shared/enums';
@@ -22,7 +22,8 @@ export class ApiService {
     SERVER_ERROR = 'An unknown error has occurred. Please refresh the page.';
     WARNING_YOUR_SESSION_HAS_EXPIRED = 'Your session has expired, please log in again.';
 
-    constructor(private httpClient: HttpClient,
+    constructor(
+        private httpClient: HttpClient,
         private router: Router) {
     }
 
@@ -126,7 +127,7 @@ export class ApiService {
             tap((res) => {
                 // dowload file
             }),
-            catchError((error) => this.handleError(error, url))
+            catchError((error) => this.handleError(error))
         );
     }
 
@@ -328,8 +329,7 @@ export class ApiService {
     }
     //#endregion
 
-
-        //#region Helper
+    //#region Helper
     private handleError = (error: HttpErrorResponse) => {
         let messageError = '';
         let errorCode: ApiErrorCode;
@@ -399,24 +399,24 @@ export class ApiService {
     //#endregion
 
     navigateToForbidden() {
-        this.router.navigate([AppUrls.Forbidden]);
+        this.router.navigateByUrl(APP_URLS.FORBIDDEN);
     }
 
     navigateToLogin(callbackUrl = false) {
         let pathname: string | null = window.location.pathname;
-        if (pathname === '/' || pathname === '/login') {
+        if (pathname === APP_URLS.HOME || pathname === APP_URLS.LOGIN) {
             pathname = null;
         }
         //
         //
         if (pathname && callbackUrl === true) {
-            // window.location.href = `${AppUrls.Login}?callback=${callback}`;
-            this.router.navigate([`/${AppUrls.Login}`], {
+            // window.location.href = `${APP_URLS.Login}?callback=${callback}`;
+            this.router.navigate([APP_URLS.LOGIN], {
                 queryParams: { callback: encodeURIComponent(window.location.href) }
             });
         } else {
-            // window.location.href = `${AppUrls.Login}`;
-            this.router.navigate([`/${AppUrls.Login}`]);
+            // window.location.href = `${APP_URLS.Login}`;
+            this.router.navigate([APP_URLS.LOGIN]);
         }
     }
 }

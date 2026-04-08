@@ -13,11 +13,16 @@
     "js/ts.preferences.quoteStyle": "single",
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
-      },
+    },
     "[typescript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "html.format.enable": true,
     "html.format.wrapAttributes": "force-aligned",
-    "workbench.editor.enablePreview": false
+    "workbench.editor.enablePreview": false,
+    //
+    "css.styleSheets": [
+        "**/${fileBasenameNoExtension}.scss",
+        "**/${fileBasenameNoExtension}.css"
+    ]
 }

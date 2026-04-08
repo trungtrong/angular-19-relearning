@@ -1,1 +1,80 @@
-<div>This is login Page</div>
+<div>
+    <!-- Title -->
+    <div>Login to your account</div>
+    <div class="login-error">Incorrect Email or Password</div>
+    <!-- Email -->
+    <div class="login-form-wrapper">
+        <div class="login-form-container">
+            <div class="field-wrapper">
+                <span class="field-label">Email</span>
+                <dx-text-box
+                    #emailTextBox
+                    [disabled]="isLoading"
+                    [placeholder]="'Enter Email'"
+                    [valueChangeEvent]="'input'"
+                    [(value)]="userLoginInfo.email"
+                    (onValueChanged)="dataChanged()"
+                    (onEnterKey)="onLogin()"
+                >
+                    <dx-validator>
+                        <dxi-validator-validation-rule
+                            [type]="'required'"
+                            [message]="'Email is required'"
+                        >
+                        </dxi-validator-validation-rule>
+                        <dxi-validator-validation-rule
+                            [type]="'email'"
+                            [message]="'Email is invalid'"
+                        >
+                        </dxi-validator-validation-rule>
+                    </dx-validator>
+                </dx-text-box>
+            </div>
+
+            <div class="field-wrapper">
+                <span class="field-label">Password</span>
+                <dx-text-box
+                    #passwordTextBox
+                    [mode]="passwordMode"
+                    [disabled]="isLoading"
+                    [inputAttr]="{ autocomplete: 'on' }"
+                    [placeholder]="'Enter Password'"
+                    [valueChangeEvent]="'input'"
+                    [(value)]="userLoginInfo.password"
+                    (onValueChanged)="dataChanged()"
+                    (onEnterKey)="onLogin()"
+                >
+                    <dxi-text-box-button
+                        name="password"
+                        location="after"
+                        [options]="passwordButton"
+                    ></dxi-text-box-button>
+                    <dx-validator>
+                        <dxi-validator-validation-rule
+                            [type]="'required'"
+                            [message]="'Password is required'"
+                        >
+                        </dxi-validator-validation-rule>
+                        <dxi-validator-validation-rule
+                            [type]="'stringLength'"
+                            [min]="6"
+                            [message]="'Password length must be greater than 6'"
+                        >
+                        </dxi-validator-validation-rule>
+                    </dx-validator>
+                </dx-text-box>
+            </div>
+
+            <div class="">
+                <dx-check-box
+                    [disabled]="isLoading"
+                    [text]="'Keep Me Logged In'"
+                    [(value)]="userLoginInfo.isRememberMe"
+                ></dx-check-box>
+            </div>
+
+            <button (click)="onLogin()" [disabled]="isLoading">Log In</button>
+        </div>
+    </div>
+    <!-- Password -->
+</div>

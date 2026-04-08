@@ -3,6 +3,7 @@ import { provideRouter, withPreloading } from '@angular/router';
 
 import { routes } from './app.routes';
 import { QuicklinkStrategy } from 'ngx-quicklink';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -10,6 +11,7 @@ export const appConfig: ApplicationConfig = {
         provideRouter(
             routes,
             withPreloading(QuicklinkStrategy),
-        )
+        ),
+        provideHttpClient()
     ]
 };
