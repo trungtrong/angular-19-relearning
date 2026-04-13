@@ -1,9 +1,27 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withPreloading } from '@angular/router';
-
-import { routes } from './app.routes';
-import { QuicklinkStrategy } from 'ngx-quicklink';
 import { provideHttpClient } from '@angular/common/http';
+//
+import { QuicklinkStrategy } from 'ngx-quicklink';
+//
+import { NgxsModuleOptions, provideStore } from '@ngxs/store';
+import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
+import { withNgxsRouterPlugin } from '@ngxs/router-plugin';
+import { NgxsSelectSnapshotModule } from '@ngxs-labs/select-snapshot';
+import { withNgxsResetPlugin } from 'ngxs-reset-plugin';
+//
+import { routes } from './app.routes';
+import { environment } from '@environment';
+
+export const ngxsConfig: NgxsModuleOptions = {
+    developmentMode: !environment.production,
+    selectorOptions: {
+        suppressErrors: false
+    },
+    compatibility: {
+        strictContentSecurityPolicy: true
+    }
+};
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -12,6 +30,18 @@ export const appConfig: ApplicationConfig = {
             routes,
             withPreloading(QuicklinkStrategy),
         ),
-        provideHttpClient()
+        provideHttpClient(),
+        // Ngxs
+        provideStore([], ngxsConfig),
+        withNgxsReduxDevtoolsPlugin({
+            name: 'App Store',
+            disabled: environment.production
+        }),
+        withNgxsRouterPlugin(),
+        withNgxsResetPlugin(),
+        importProvidersFrom([
+            NgxsSelectSnapshotModule.forRoot(),
+        ]),
     ]
 };
+
