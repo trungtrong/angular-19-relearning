@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 //
 import { DxCheckBoxModule, DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
 import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import { DxTextBoxComponent, DxTextBoxTypes } from 'devextreme-angular/ui/text-box';
 import { finalize, Subject, Subscription } from 'rxjs';
 //
-import { UserLoginInfoRequestModel, UserLoginInfoViewModel } from '../../models';
+import { AuthLoggedInModel, UserLoginInfoRequestModel, UserLoginInfoViewModel } from '../../models';
 import { StringHelper, RegexHelper, APP_REGEX } from '@app/utilities';
 import { UserService } from '@app/modules/user/services';
-import { Router } from '@angular/router';
 import { APP_URLS } from '@app/shared/constants';
 
 @Component({
@@ -151,7 +151,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             finalize(() => {
                 this.isLoading = false;
             })
-        ).subscribe((res: boolean) => {
+        ).subscribe((res: AuthLoggedInModel) => {
             console.log(res);
             // 1- Save Login Info
             this.storeLoginInfo();

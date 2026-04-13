@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@app/core/services';
-import { UserLoginInfoRequestModel } from '@app/modules/auth/models';
+import { AuthLoggedInModel, UserLoginInfoRequestModel } from '@app/modules/auth/models';
 import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({
@@ -14,8 +14,8 @@ export class UserService {
     }
 
     //#region Authentication
-    login(loginInfo: UserLoginInfoRequestModel): Observable<boolean> {
-        return of(true);
+    login(loginInfo: UserLoginInfoRequestModel): Observable<AuthLoggedInModel> {
+        return of(new AuthLoggedInModel());
         return throwError(() => new Error('Something went wrong!'));
         return this._apiService.post(`${this.USER_API_URL}/auth`, loginInfo);
     }

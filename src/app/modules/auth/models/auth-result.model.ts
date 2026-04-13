@@ -2,12 +2,12 @@ import { BaseModel } from '@app/shared/models';
 import { UserRole } from '../enums';
 import { UserPermissionModel } from './user-permissions.model';
 
-export class AuthInfoModel {
+export class AuthLoggedInModel {
     account?: AccountLoggedInModel;
     user?: UserLoggedInModel;
     jwt?: string;
 
-    constructor(init?: AuthInfoModel) {
+    constructor(init?: AuthLoggedInModel) {
         Object.assign(this, init);
     }
 }
