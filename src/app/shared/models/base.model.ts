@@ -1,5 +1,6 @@
 export class BaseModel {
     id?: string;
+    name?: string;
     createdAt?: Date | string;
     createdBy?: string;
     updatedAt?: Date | string;

@@ -10,6 +10,7 @@ import { UserLoginInfoRequestModel, UserLoginInfoViewModel } from '../../models'
 import { StringHelper, RegexHelper, APP_REGEX } from '@app/utilities';
 import { UserService } from '@app/modules/user/services';
 import { Router } from '@angular/router';
+import { APP_URLS } from '@app/shared/constants';
 
 @Component({
     standalone: true,
@@ -152,10 +153,17 @@ export class LoginComponent implements OnInit, OnDestroy {
             })
         ).subscribe((res: boolean) => {
             console.log(res);
-            // 1- Save UserInfo to Storage, LocalStorage, SessionStorage
+            // 1- Save Login Info
+            this.storeLoginInfo();
             // 2 - Navigate to Home Page
-            this._router.navigateByUrl('/');
+            this._router.navigateByUrl(APP_URLS.HOME);
         })
+    }
+
+    storeLoginInfo() {
+        // Store User Info to Ngxs Storage, LocalStorage
+
+        // Navigate to Home Page
     }
     //#endregion
 }
