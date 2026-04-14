@@ -1,9 +1,10 @@
 export class AppStorage {
-    public static storeEncodeData(params: {
+    public static storeData(params: {
         storage: 'local' | 'session' | 'local-and-session';
         key: string;
         value: unknown;
         valueType?: 'string' | 'number' | 'object' | 'array';
+        isEncode?: boolean
     }) {
         if (!params.key) {
             return;
@@ -17,14 +18,14 @@ export class AppStorage {
             params.valueType = 'string';
         }
         //
-        let valueString: string | number | boolean;
+        let valueString: string;
         //
         switch (params.valueType) {
             case 'object':
             case 'array':
+            case 'number':
                 valueString = JSON.stringify(params.value);
                 break;
-            case 'number':
             case 'string':
             default:
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -32,18 +33,19 @@ export class AppStorage {
                 valueString = params.value;
                 break;
         }
+        const finalValue: string = params.isEncode ? btoa(encodeURIComponent(valueString)) : valueString;
         //
         switch (params.storage) {
             case 'session':
-                sessionStorage.setItem(params.key, btoa(encodeURIComponent(valueString)));
+                sessionStorage.setItem(params.key, finalValue);
                 break;
             case 'local-and-session':
-                sessionStorage.setItem(params.key, btoa(encodeURIComponent(valueString)));
-                localStorage.setItem(params.key, btoa(encodeURIComponent(valueString)));
+                sessionStorage.setItem(params.key, finalValue);
+                localStorage.setItem(params.key, finalValue);
                 break;
             case 'local':
             default:
-                localStorage.setItem(params.key, btoa(encodeURIComponent(valueString)));
+                localStorage.setItem(params.key, finalValue);
                 break;
         }
     }

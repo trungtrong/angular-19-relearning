@@ -10,7 +10,7 @@ import { ACCESS_TOKEN_KEY, APP_URLS, AUTH_SCHEME } from '@app/shared/constants';
 import { environment } from '@environment';
 import { AttachmentModel, ListItemModel } from '@app/shared/models';
 import { ApiErrorCode } from '@app/shared/enums';
-import { UserStorage } from '../states';
+import { UserStorage } from '../states/user';
 
 @Injectable({
     providedIn: 'root'

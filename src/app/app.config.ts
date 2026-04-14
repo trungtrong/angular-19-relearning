@@ -12,6 +12,7 @@ import { withNgxsResetPlugin } from 'ngxs-reset-plugin';
 //
 import { routes } from './app.routes';
 import { environment } from '@environment';
+import { UserState } from '@app/core/states/user/user.state';
 
 export const ngxsConfig: NgxsModuleOptions = {
     developmentMode: !environment.production,
@@ -32,7 +33,7 @@ export const appConfig: ApplicationConfig = {
         ),
         provideHttpClient(),
         // Ngxs
-        provideStore([], ngxsConfig),
+        provideStore([UserState], ngxsConfig),
         withNgxsReduxDevtoolsPlugin({
             name: 'App Store',
             disabled: environment.production

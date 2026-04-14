@@ -6,11 +6,14 @@ import { DxCheckBoxModule, DxTextBoxModule, DxValidatorModule } from 'devextreme
 import { DxButtonTypes } from 'devextreme-angular/ui/button';
 import { DxTextBoxComponent, DxTextBoxTypes } from 'devextreme-angular/ui/text-box';
 import { finalize, Subject, Subscription } from 'rxjs';
+import { Store } from '@ngxs/store';
 //
-import { AuthLoggedInModel, UserLoginInfoRequestModel, UserLoginInfoViewModel } from '../../models';
+import { AuthLoggedInModel, SetAuthLoggedInModel, UserLoginInfoRequestModel, UserLoginInfoViewModel } from '../../models';
 import { StringHelper, RegexHelper, APP_REGEX } from '@app/utilities';
 import { UserService } from '@app/modules/user/services';
 import { APP_URLS } from '@app/shared/constants';
+import * as UserActions from '@app/core/states/user';
+import { SetUpNewAuthLoggedInType } from '../../enums';
 
 @Component({
     standalone: true,
@@ -57,8 +60,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _subscriptions$: Subscription = new Subscription();
 
     constructor(
-        private _userService: UserService,
         private _router: Router,
+        private _store: Store,
+        private _userService: UserService,
     ) {
         this._subscribeAutofillDetection();
     }
@@ -154,16 +158,19 @@ export class LoginComponent implements OnInit, OnDestroy {
         ).subscribe((res: AuthLoggedInModel) => {
             console.log(res);
             // 1- Save Login Info
-            this.storeLoginInfo();
+            this.storeLoginInfo(res);
             // 2 - Navigate to Home Page
             this._router.navigateByUrl(APP_URLS.HOME);
         })
     }
 
-    storeLoginInfo() {
-        // Store User Info to Ngxs Storage, LocalStorage
-
-        // Navigate to Home Page
+    storeLoginInfo(authInfo: AuthLoggedInModel) {
+        this._store.dispatch(new UserActions.SetAuthLoggedIn(
+            new SetAuthLoggedInModel({
+                authInfo: authInfo,
+                setUpNewAuthInfoType: SetUpNewAuthLoggedInType.Login
+            })
+        ))
     }
     //#endregion
 }

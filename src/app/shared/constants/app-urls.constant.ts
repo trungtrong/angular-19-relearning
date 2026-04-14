@@ -1,6 +1,6 @@
-export enum APP_URLS {
-    HOME = '/',
+export const APP_URLS = {
+    HOME: '/',
     //
-    LOGIN = '/login',
-    FORBIDDEN = '/forbidden'
+    LOGIN: '/login',
+    FORBIDDEN: '/forbidden'
 }
