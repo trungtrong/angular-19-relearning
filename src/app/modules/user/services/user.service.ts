@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '@app/core/services';
 import { AuthLoggedInModel, UserLoginInfoRequestModel } from '@app/modules/auth/models';
 import { UserMockData } from 'app/fake-data/auth';
-import { Observable, of, throwError } from 'rxjs';
+import { delay, Observable, of, throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +22,7 @@ export class UserService {
     }
 
     getAuthLoggedIn(): Observable<AuthLoggedInModel> {
-        return of(UserMockData.login());
+        return of(UserMockData.login()).pipe(delay(5000));
         return throwError(() => new Error('Something went wrong!'));
         return this._apiService.get(`${this.USER_API_URL}/auth`);
     }

@@ -3,6 +3,7 @@
 @use 'tailwindcss/utilities';
 //
 @use "./variables";
+@use "./components/index";
 
 html, body {
     margin: 0;
