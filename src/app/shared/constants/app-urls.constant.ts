@@ -1,6 +1,10 @@
 export const APP_URLS = {
     HOME: '/',
     //
+    FORBIDDEN: '/forbidden',
+    MAINTENANCE: '/maintenance',
+    //
     LOGIN: '/login',
-    FORBIDDEN: '/forbidden'
+    SIGNUP: '/signup',
+    FORGOT_PASSWORD: '/forgot-password',
 }

@@ -15,8 +15,8 @@ export class SetAuthLoggedIn {
 export class Logout {
     static readonly type = UserActionType.LOGOUT;
 
-    constructor(public readonly payload: {
-        navigateToUrl: string
+    constructor(public readonly payload?: {
+        navigateToUrl?: string
     }) { }
 }
 

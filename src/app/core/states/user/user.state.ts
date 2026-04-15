@@ -9,6 +9,7 @@ import * as UserActions from './user.actions';
 import { APP_URLS } from '@app/shared/constants';
 import { AppStorage, StringHelper } from '@app/utilities';
 import { APP_STORAGE_KEYS } from './user.storage';
+import { StateResetAll } from 'ngxs-reset-plugin';
 
 const INIT_STATE: AuthLoggedInModel = {
     account: undefined,
@@ -70,7 +71,7 @@ export class UserState {
         });
         AppStorage.storeData({
             storage: 'local',
-            key: APP_STORAGE_KEYS.JWT_TOKEN,
+            key: APP_STORAGE_KEYS.USER_JWT,
             value: params.authInfo?.jwt
         });
     }
@@ -78,8 +79,16 @@ export class UserState {
     //#endregion
 
     @Action(UserActions.Logout)
-    Logout(context: StateContext<AuthLoggedInModel>, { payload }: UserActions.SetAuthLoggedIn) {
+    Logout(context: StateContext<AuthLoggedInModel>, { payload }: UserActions.Logout) {
         // Reset States
+        this._store.dispatch(new StateResetAll());
         // Clear Browser Storage
+        AppStorage.clearStorage({ storage: 'local-and-session' });
+        //
+        if (payload?.navigateToUrl) {
+            setTimeout(() => {
+                this._store.dispatch(new Navigate([payload.navigateToUrl]));
+            }, 100);
+        }
     }
 }

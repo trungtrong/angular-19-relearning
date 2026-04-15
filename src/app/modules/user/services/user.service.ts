@@ -20,5 +20,11 @@ export class UserService {
         return throwError(() => new Error('Something went wrong!'));
         return this._apiService.post(`${this.USER_API_URL}/auth`, loginInfo);
     }
+
+    getAuthLoggedIn(): Observable<AuthLoggedInModel> {
+        return of(UserMockData.login());
+        return throwError(() => new Error('Something went wrong!'));
+        return this._apiService.get(`${this.USER_API_URL}/auth`);
+    }
     //#endregion
 }

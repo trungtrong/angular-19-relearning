@@ -55,7 +55,7 @@ export class AppStorage {
         key: string;
         valueType?: 'string' | 'number' | 'object' | 'array';
         isDecode?: boolean;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }): any {
         if (!params) {
             return null;
@@ -105,6 +105,23 @@ export class AppStorage {
                 default:
                     return '';
             }
+        }
+    }
+
+    public static clearStorage(params: {
+        storage: 'local' | 'session' | 'local-and-session';
+    }): void {
+        switch (params.storage) {
+            case 'session':
+                sessionStorage.clear();
+                break;
+            case 'local-and-session':
+                sessionStorage.clear(); localStorage.clear();
+                break;
+            case 'local':
+            default:
+                localStorage.clear();
+                break;
         }
     }
 }

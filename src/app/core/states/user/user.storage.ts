@@ -1,15 +1,17 @@
+import { AppStorage, StringHelper } from '@app/utilities'
+
 export const APP_STORAGE_KEYS = {
     ACCOUNT_ID: '_app_aid',
     USER_ID: '_app_uid',
-    JWT_TOKEN: '_app_utk',
+    USER_JWT: '_app_utk',
 }
 
 export class UserStorage {
-    public static removeSessionStorage(): void {
-        sessionStorage.clear();
-    }
-
-    public static removeLocalStorage(): void {
-        localStorage.clear();
+    public static isUserLoggedIn() {
+        const jwt = AppStorage.getStorageValue({
+            storage: 'local',
+            key: APP_STORAGE_KEYS.USER_JWT
+        })
+        return !StringHelper.isValueEmpty(jwt);
     }
 }

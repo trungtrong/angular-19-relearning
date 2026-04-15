@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withPreloading } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 //
@@ -13,6 +13,7 @@ import { withNgxsResetPlugin } from 'ngxs-reset-plugin';
 import { routes } from './app.routes';
 import { environment } from '@environment';
 import { UserState } from '@app/core/states/user/user.state';
+import { AppInitializerService } from './core/services';
 
 export const ngxsConfig: NgxsModuleOptions = {
     developmentMode: !environment.production,
@@ -22,6 +23,12 @@ export const ngxsConfig: NgxsModuleOptions = {
     compatibility: {
         strictContentSecurityPolicy: true
     }
+};
+
+const initializerFn = (): Promise<unknown> => {
+    // because DI framework is set up after bootstrap app - APP initialize
+    const _appInitService = inject(AppInitializerService);
+    return _appInitService.initApp();
 };
 
 export const appConfig: ApplicationConfig = {
@@ -43,6 +50,8 @@ export const appConfig: ApplicationConfig = {
         importProvidersFrom([
             NgxsSelectSnapshotModule.forRoot(),
         ]),
+        // Services
+        provideAppInitializer(initializerFn)
     ]
 };
 

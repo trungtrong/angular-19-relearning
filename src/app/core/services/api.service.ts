@@ -10,7 +10,6 @@ import { ACCESS_TOKEN_KEY, APP_URLS, AUTH_SCHEME } from '@app/shared/constants';
 import { environment } from '@environment';
 import { AttachmentModel, ListItemModel } from '@app/shared/models';
 import { ApiErrorCode } from '@app/shared/enums';
-import { UserStorage } from '../states/user';
 
 @Injectable({
     providedIn: 'root'
@@ -336,8 +335,9 @@ export class ApiService {
         //
         switch (error.status) {
             case 401:
-                UserStorage.removeLocalStorage();
-                UserStorage.removeSessionStorage();
+                AppStorage.clearStorage({
+                    storage: 'local-and-session'
+                });
                 //
                 errorCode = ApiErrorCode.Warning;
                 messageError = this.WARNING_YOUR_SESSION_HAS_EXPIRED;
