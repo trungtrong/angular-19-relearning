@@ -86,9 +86,10 @@ export class UserState {
         AppStorage.clearStorage({ storage: 'local-and-session' });
         //
         if (payload?.navigateToUrl) {
-            setTimeout(() => {
+            // Remove SetTimeOut -> it must go to Login Page instantly
+            // setTimeout(() => {
                 this._store.dispatch(new Navigate([payload.navigateToUrl]));
-            }, 100);
+            // }, 100);
         }
     }
 }
