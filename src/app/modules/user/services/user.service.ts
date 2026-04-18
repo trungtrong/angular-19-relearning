@@ -22,7 +22,7 @@ export class UserService {
     }
 
     getAuthLoggedIn(): Observable<AuthLoggedInModel> {
-        return of(UserMockData.login()).pipe(delay(5000));
+        return of(UserMockData.login()).pipe(delay(1000));
         return throwError(() => new Error('Something went wrong!'));
         return this._apiService.get(`${this.USER_API_URL}/auth`);
     }

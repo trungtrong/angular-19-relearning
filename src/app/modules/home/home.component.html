@@ -1,2 +1,14 @@
-<div>This is Home Page</div>
 <router-outlet></router-outlet>
+<app-page-layout [leftSidebarTemplate]="sidebarMenuTemplate"
+                 [mainTemplate]="mainTemplate">
+</app-page-layout>
+
+<ng-template #sidebarMenuTemplate>
+    <app-sidebar-menu [tabs]="sidebarTabs"
+                      [isNavigateByRouterLink]="false">
+    </app-sidebar-menu>
+</ng-template>
+
+<ng-template #mainTemplate>
+    <router-outlet></router-outlet>
+</ng-template>

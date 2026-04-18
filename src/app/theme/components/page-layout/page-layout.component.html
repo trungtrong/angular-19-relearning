@@ -1,0 +1,16 @@
+<div class="page-layout-wrapper">
+    <!-- Sidebar Menu -->
+    <div *ngIf="leftSidebarTemplate"
+        class="page-layout__sidebar-menu">
+        <ng-template [ngTemplateOutlet]="leftSidebarTemplate"></ng-template>
+    </div>
+
+    <!-- Main Page Content -->
+    <div class="page-layout__content">
+        <ng-template [ngTemplateOutlet]="mainTemplate ? mainTemplate : nullTemplate"></ng-template>
+    </div>
+</div>
+
+<ng-template #nullTemplate>
+    <div></div>
+</ng-template>

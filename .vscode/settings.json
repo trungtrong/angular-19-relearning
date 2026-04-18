@@ -17,6 +17,10 @@
     "[typescript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
+    "[html]": {
+        "editor.suggest.insertMode": "replace",
+        "editor.defaultFormatter": "vscode.html-language-features",
+    },
     "html.format.enable": true,
     "html.format.wrapAttributes": "force-aligned",
     "workbench.editor.enablePreview": false,

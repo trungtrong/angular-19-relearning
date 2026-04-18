@@ -1,0 +1,32 @@
+.page-layout-wrapper {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-layout__sidebar-menu {
+    width: 300px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: #FFF;
+    transform: none;
+    visibility: visible;
+    transition-duration: 0.5;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: left, width;
+}
+
+.page-layout__content {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 11;
+    margin: 300px;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: margin, width;
+}

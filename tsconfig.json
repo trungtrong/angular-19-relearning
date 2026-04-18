@@ -24,6 +24,8 @@
             "@environments/*": ["environments/*"],
             "@app/utilities": ["app/utilities"],
             "@app/common/*": ["app/common/*"],
+            "@app/common/directives/*": ["app/common/directives/*"],
+            "@app/common/pipes/*": ["app/common/pipes/*"],
             "@app/core/*": ["app/core/*"],
             "@app/core/guards/*": ["app/core/guards/*"],
             "@app/core/interceptors/*": ["app/core/interceptors/*"],
@@ -33,7 +35,6 @@
             "@app/core/services/*": ["app/core/services/*"],
             "@app/core/states/*": ["app/core/states/*"],
             "@app/modules/*": ["app/modules/*"],
-            "@app/theme": ["app/theme"],
             "@app/shared/*": ["app/shared/*"],
             "@app/shared/components": ["app/shared/components/index.ts"],
             "@app/shared/components/*": ["app/shared/components/*"],
@@ -43,6 +44,8 @@
             "@app/services/*": ["app/services/*"],
             "@app/models": ["app/models"],
             "@app/models/*": ["app/models/*"],
+            "@app/theme/*": ["app/theme/*"],
+            "@app/theme/components/*": ["app/theme/components/*"],
             "@svg-icons": ["assets/icons/svg-icons.constants.ts"]
         }
     },

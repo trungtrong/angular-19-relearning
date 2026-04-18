@@ -1,0 +1,37 @@
+.sidebar-menu-wrapper {
+    height: 100%;
+    width: inherit;
+    border-right: 1px solid #7a6d6d;
+}
+
+.sidebar-menu-content {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu-item-container {
+    padding: 5px;
+    margin-bottom: 5px;
+
+    &:last-child {
+        margin-bottom: 0px;
+    }
+}
+
+.sidebar-menu-item {
+    display: block;
+    padding: 10px 20px;
+    color: #FFF;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #6fb6f2;
+    }
+
+    &.active {
+        background-color: #2f608a;
+    }
+}
+

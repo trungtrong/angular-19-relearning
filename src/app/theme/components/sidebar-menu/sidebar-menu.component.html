@@ -1,0 +1,137 @@
+<div class="sidebar-menu-wrapper">
+    <dx-scroll-view class="sidebar-menu-scrollview"
+                    [direction]="'vertical'">
+        <ul *ngIf="!!tabs?.length"
+            class="sidebar-menu-content">
+            <ng-container *ngFor="let tab of tabs; index as tabIndex; trackBy: trackByFn">
+                <li *ngIf="tab.visible"
+                    class="sidebar-menu-item-container">
+                    <!-- Router Link -->
+                    <ng-container *ngIf="tab.routerLink && !tab?.subTabs?.length">
+                        <ng-container *ngIf="!tab.disabled">
+                            <ng-container *ngTemplateOutlet="
+                                    tabHasRouterLink;
+                                    context: {
+                                        tab: tab,
+                                    }
+                                "></ng-container>
+                        </ng-container>
+
+                        <ng-container *ngIf="tab.disabled">
+                            <ng-container *ngTemplateOutlet="
+                                    tabHasDisabledRouterLink;
+                                    context: {
+                                        tab: tab,
+                                    }
+                                "></ng-container>
+                        </ng-container>
+                    </ng-container>
+
+                    <!-- Button -->
+                    <ng-container *ngIf="!tab.routerLink && !tab?.subTabs?.length">
+                        <ng-container *ngTemplateOutlet="
+                                tabHasNoRouterLink;
+                                context: {
+                                    tab: tab,
+                                }
+                            "></ng-container>
+                    </ng-container>
+
+                    <!-- Parent Tab -->
+                    <ng-container *ngIf="!!tab?.subTabs && !!tab?.subTabs?.length">
+                        <a class="sidebar-menu-item"
+                           [class.active]="
+                                currentUrl
+                                    | function
+                                        : isParentTabActive
+                                        : tab.routerLinksOfSubTabs
+                            "
+                           [attr.is-expanded]="tab.isExpanded"
+                           (keypress)="onToggleParentTab(tab)">
+                            <div class="flex tab-item-name">{{ tab.name }}</div>
+                        </a>
+
+                        <ul class="sidebar-menu-item__sub-tabs"
+                            [@expandCollapseAnimation]="
+                                tab.isExpanded ? 'open' : 'closed'
+                            ">
+                            <ng-container *ngFor="
+                                    let subTab of tab.subTabs;
+                                    index as subTabIndex;
+                                    trackBy: trackByFn
+                                ">
+                                <li *ngIf="subTab.visible"
+                                    class="sidebar-menu-item-container">
+                                    <ng-container *ngIf="
+                                            subTab.routerLink &&
+                                            !subTab.disabled
+                                        ">
+                                        <ng-container *ngTemplateOutlet="
+                                                tabHasRouterLink;
+                                                context: {
+                                                    tab: subTab,
+                                                }
+                                            "></ng-container>
+                                    </ng-container>
+                                    <ng-container *ngIf="
+                                            subTab.routerLink &&
+                                            !!subTab.disabled
+                                        ">
+                                        <ng-container *ngTemplateOutlet="
+                                                tabHasDisabledRouterLink;
+                                                context: {
+                                                    tab: subTab,
+                                                }
+                                            "></ng-container>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!subTab.routerLink">
+                                        <ng-container *ngTemplateOutlet="
+                                                tabHasNoRouterLink;
+                                                context: {
+                                                    tab: subTab,
+                                                }
+                                            "></ng-container>
+                                    </ng-container>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </ng-container>
+                </li>
+            </ng-container>
+        </ul>
+    </dx-scroll-view>
+</div>
+
+<ng-template #tabHasRouterLink
+             let-tab="tab">
+    <a class="sidebar-menu-item"
+       [routerLink]="tab.routerLink"
+       [routerLinkActive]="'active'"
+       [title]="tab.name">
+        <div>{{ tab.name }}</div>
+    </a>
+</ng-template>
+
+<ng-template #tabHasDisabledRouterLink
+             let-tab="tab">
+    <a class="sidebar-menu-item"
+       [ngClass]="{
+            'is-disabled': tab.disabled,
+        }"
+       [title]="tab.name">
+        <div>{{ tab.name }}</div>
+    </a>
+</ng-template>
+
+<ng-template #tabHasNoRouterLink
+             let-tab="tab">
+    <a class="sidebar-menu-item"
+       [ngClass]="{
+            'is-disabled': tab.disabled,
+            active: tabSelected.id === tab.id,
+        }"
+       [title]="tab.name">
+        <div>{{ tab.name }}</div>
+    </a>
+</ng-template>
