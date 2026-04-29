@@ -7,4 +7,7 @@ export const APP_URLS = {
     LOGIN: '/login',
     SIGNUP: '/signup',
     FORGOT_PASSWORD: '/forgot-password',
+    //
+    Home_ExampleOne: 'example-one',
+    Home_ExampleTwo: 'example-two'
 }

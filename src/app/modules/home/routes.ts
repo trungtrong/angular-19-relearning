@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 //
 import { HomeComponent } from './home.component';
-import { AuthGuard } from '@app/core/guards';
+import { AuthGuard, PermissionGuard, PermissionGuardDataModel } from '@app/core/guards';
+import { UserRole } from '../auth/enums';
+import { APP_URLS } from '@app/shared/constants';
 
 export const HOME_ROUTES: Routes = [
     {
@@ -22,7 +24,13 @@ export const HOME_ROUTES: Routes = [
             {
                 path: "example-two",
                 loadComponent: () => import('@app/modules/example-two/example-two.component').then((c) => c.ExampleTwoComponent),
-                canActivate: [AuthGuard],
+                canActivate: [AuthGuard, PermissionGuard],
+                data: {
+                    permissionData: new PermissionGuardDataModel({
+                        allowedRoles: [UserRole.Admin],
+                        fallbackUrl: APP_URLS.Home_ExampleOne
+                    })
+                }
             }
         ]
     }

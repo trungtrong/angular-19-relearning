@@ -5,7 +5,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
     standalone: true
 })
 export class IfDirective {
-    @Input() setIf(show: boolean) {
+    @Input() set appIf(show: boolean) {
         if (show) {
             this._viewContainerRef.createEmbeddedView(this._templateRef);
         } else {

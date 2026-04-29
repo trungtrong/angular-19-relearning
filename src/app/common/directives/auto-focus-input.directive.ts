@@ -4,6 +4,12 @@ import { Directive, ElementRef, input, Input, OnInit } from '@angular/core';
     selector: '[appAutoFocusInput]',
     standalone: true
 })
+
+/*
+<dx-text-box appAutoFocusInput
+             [isEnableFocus]="deleteChatboxPopupVisible">
+</dx-text-box>
+*/
 export class AutoFocusInputDirective implements OnInit {
     @Input() timeout = 500;
 
