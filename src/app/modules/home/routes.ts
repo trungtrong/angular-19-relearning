@@ -13,12 +13,12 @@ export const HOME_ROUTES: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'example-one',
+                redirectTo: 'router-config',
                 pathMatch: 'full'
             },
             {
-                path: "example-one",
-                loadComponent: () => import('@app/modules/example-one/example-one.component').then((c) => c.ExampleOneComponent),
+                path: "router-config",
+                loadComponent: () => import('@app/modules/router-config/router-config.component').then((c) => c.RouterConfigComponent),
                 canActivate: [AuthGuard],
             },
             {
@@ -28,7 +28,7 @@ export const HOME_ROUTES: Routes = [
                 data: {
                     permissionData: new PermissionGuardDataModel({
                         allowedRoles: [UserRole.Admin],
-                        fallbackUrl: APP_URLS.Home_ExampleOne
+                        fallbackUrl: APP_URLS.Home_RouterConfig
                     })
                 }
             }

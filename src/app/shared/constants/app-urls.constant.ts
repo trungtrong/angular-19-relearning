@@ -8,6 +8,6 @@ export const APP_URLS = {
     SIGNUP: '/signup',
     FORGOT_PASSWORD: '/forgot-password',
     //
-    Home_ExampleOne: 'example-one',
+    Home_RouterConfig: 'router-config',
     Home_ExampleTwo: 'example-two'
 }
