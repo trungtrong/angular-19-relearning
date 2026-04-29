@@ -2,7 +2,7 @@ import { ApplicationConfig, importProvidersFrom, inject, provideAppInitializer, 
 import { provideRouter, withPreloading } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 //
-import { QuicklinkStrategy } from 'ngx-quicklink';
+import { quicklinkProviders, QuicklinkStrategy } from 'ngx-quicklink';
 //
 import { NgxsModuleOptions, provideStore } from '@ngxs/store';
 import { withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
@@ -34,11 +34,14 @@ const initializerFn = (): Promise<unknown> => {
 export const appConfig: ApplicationConfig = {
     providers: [
         provideZoneChangeDetection({ eventCoalescing: true }),
+        provideHttpClient(),
+        //
+        quicklinkProviders,
         provideRouter(
             routes,
             withPreloading(QuicklinkStrategy),
         ),
-        provideHttpClient(),
+        //
         // Ngxs
         provideStore([UserState], ngxsConfig),
         withNgxsReduxDevtoolsPlugin({

@@ -19,11 +19,17 @@ import { PageLayoutComponent, SidebarMenuComponent } from '@app/theme/components
 export class HomeComponent implements OnInit {
     sidebarTabs: SidebarMenuTabViewModel[] = [
         new SidebarMenuTabViewModel({
-            id: 'Subscriptions',
-            name: 'Subscriptions',
+            id: 'exampleOne',
+            name: 'ExampleOne',
             visible: true,
-            // routerLink: 'subscription'
-        })
+            routerLink: 'example-one'
+        }),
+        new SidebarMenuTabViewModel({
+            id: 'exampleTwo',
+            name: 'ExampleTwo',
+            visible: true,
+            routerLink: 'example-two'
+        }),
     ]
 
     ngOnInit(): void {

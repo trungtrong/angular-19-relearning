@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterLinkActive } from "@angular/router";
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 //
 import { DxScrollViewModule } from 'devextreme-angular';
@@ -20,11 +20,13 @@ import { StringHelper } from '@app/utilities';
     imports: [
         CommonModule,
         //
+        RouterLinkActive,
+        RouterLink,
+        QuicklinkDirective,
+        //
         DxScrollViewModule,
         //
         FunctionPipe,
-        QuicklinkDirective,
-        RouterLinkActive
     ]
 })
 export class SidebarMenuComponent implements OnInit {
