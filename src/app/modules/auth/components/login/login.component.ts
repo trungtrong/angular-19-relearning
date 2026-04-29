@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 //
 import { DxCheckBoxModule, DxTextBoxModule, DxValidatorModule } from 'devextreme-angular';
 import { DxButtonTypes } from 'devextreme-angular/ui/button';
@@ -52,6 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         isPasswordEnable: false
     }
     isAutofillInit = true;
+    //
+    returnUrl = '';
 
     isLoading = false;
     isDataValid = false;
@@ -61,6 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     constructor(
         private _router: Router,
+        private _activatedRoute: ActivatedRoute,
         private _store: Store,
         private _userService: UserService,
     ) {
@@ -69,10 +72,20 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         console.log('This is login');
+        this.getReturnUrl();
     }
 
     ngOnDestroy(): void {
         this._subscriptions$.unsubscribe();
+    }
+
+    getReturnUrl() {
+        this._subscriptions$.add(
+            this._activatedRoute.queryParamMap.subscribe((params) => {
+                this.returnUrl = params?.get('returnUrl') ?? '';
+                console.log('returnUrl', this.returnUrl);
+            })
+        )
     }
 
     //#region Check Data Changed
@@ -134,10 +147,10 @@ export class LoginComponent implements OnInit, OnDestroy {
                 }
                 //
                 if (this.autofillDetection.isPasswordEnable) {
-                const passwordInput = this.passwordTextBox?.instance.element().querySelector('input');
-                //
-                passwordInput?.removeEventListener('animationiteration', this.setAutofillForPassword, true);
-            }
+                    const passwordInput = this.passwordTextBox?.instance.element().querySelector('input');
+                    //
+                    passwordInput?.removeEventListener('animationiteration', this.setAutofillForPassword, true);
+                }
             })
         )
     }
@@ -160,7 +173,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             // 1- Save Login Info
             this.storeLoginInfo(res);
             // 2 - Navigate to Home Page
-            this._router.navigateByUrl(APP_URLS.HOME);
+            this.navigateToRightPageAfterLoggedIn();
         })
     }
 
@@ -171,6 +184,16 @@ export class LoginComponent implements OnInit, OnDestroy {
                 setUpNewAuthInfoType: SetUpNewAuthLoggedInType.Login
             })
         ))
+    }
+
+    navigateToRightPageAfterLoggedIn() {
+        if (!StringHelper.isValueEmpty(this.returnUrl)) {
+            const returnUrlValid = this.returnUrl.startsWith('/');
+            this._router.navigateByUrl(returnUrlValid ? this.returnUrl : '/' + this.returnUrl);
+            return;
+        }
+        //
+        this._router.navigateByUrl(APP_URLS.HOME);
     }
     //#endregion
 }

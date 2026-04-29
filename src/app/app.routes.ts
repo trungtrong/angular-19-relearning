@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
-import { PageNotFoundComponent } from './core/pages';
+//
+import { PageNotFoundComponent } from '@app/core/pages';
 
 export const routes: Routes = [
     {
         path: "",
         loadChildren: () => import('./modules/home/routes').then(c => c.HOME_ROUTES),
-        title: 'App'
+        title: 'App',
     },
     {
         path: "",
