@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
             id: 'exampleOne',
             name: 'ExampleOne',
             visible: true,
-            routerLink: 'example-one'
+            routerLink: 'router-config'
         }),
         new SidebarMenuTabViewModel({
             id: 'exampleTwo',

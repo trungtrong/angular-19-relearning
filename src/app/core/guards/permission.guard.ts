@@ -35,7 +35,7 @@ export class PermissionGuard implements CanActivate {
             return true;
         }
         //
-        const allow = permissionData && permissionData?.allowedRoles?.length ? permissionData?.allowedRoles?.includes(this.userRoleSnapshot) : false;
+        const allow = permissionData && permissionData?.allowedRoles?.length > 0 ? permissionData?.allowedRoles?.includes(this.userRoleSnapshot) : true;
         if (!allow && permissionData.fallbackUrl) {
             this._router.navigateByUrl(permissionData.fallbackUrl);
         }
